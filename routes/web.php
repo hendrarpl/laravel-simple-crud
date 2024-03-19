@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NasabahController;
 /*
@@ -17,10 +18,23 @@ use App\Http\Controllers\NasabahController;
 //     return view('welcome');
 // });
 
-Route::get('/', [NasabahController::class, 'index'])->name('nasabah.index');
-Route::get('/create', [NasabahController::class, 'create'])->name('nasabah.create');
-Route::post('/create', [NasabahController::class, 'store'])->name('nasabah.store');
-Route::get('/edit/{id}', [NasabahController::class, 'edit'])->name('nasabah.edit');
-Route::put('/update/{id}', [NasabahController::class, 'update'])->name('nasabah.update');
-Route::post('/hapus/{id}', [NasabahController::class, 'hapus'])->name('nasabah.hapus');
-Route::get('/cari', [NasabahController::class, 'cari'])->name('nasabah.cari');
+Route::middleware(['auth'])->group(function(){
+
+    Route::get('/', [NasabahController::class, 'index'])->name('nasabah.index');
+    Route::get('/create', [NasabahController::class, 'create'])->name('nasabah.create');
+    Route::post('/create', [NasabahController::class, 'store'])->name('nasabah.store');
+    Route::get('/edit/{id}', [NasabahController::class, 'edit'])->name('nasabah.edit');
+    Route::put('/update/{id}', [NasabahController::class, 'update'])->name('nasabah.update');
+    Route::post('/hapus/{id}', [NasabahController::class, 'hapus'])->name('nasabah.hapus');
+    Route::get('/cari', [NasabahController::class, 'cari'])->name('nasabah.cari');
+    Route::get('/coba', [NasabahController::class, 'coba']);
+});
+
+
+Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'loginProcess'])->name('nasabah.loginProcess')->middleware('guest');
+Route::get('/home', function(){
+    return redirect('/');
+});
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('nasabah.logout');

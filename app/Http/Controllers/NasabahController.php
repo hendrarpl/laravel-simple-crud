@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Nasabah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use PDO;
 
 class NasabahController extends Controller
 {
@@ -13,6 +15,9 @@ class NasabahController extends Controller
     }
 
     public function create(){
+        if(Auth::user()->role === 'guest'){
+            return redirect('/');
+        }
         return view('create');
     }
 
@@ -75,5 +80,30 @@ class NasabahController extends Controller
         // return $hasil;
         return view('index', ['nasabahs' => $hasil]);
     }
+
+    public function coba(){
+        $userData = [
+            [
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'role' => 'admin',
+            'password' =>  bcrypt(123456)
+            ],
+            [
+            'name' => 'guest',
+            'email' => 'guest@gmail.com',
+            'role' => 'guest',
+            'password' =>  bcrypt(123456)
+            ],
+        ];
+
+        $hasil = [];
+
+        foreach($userData as $key => $val){
+            $hasil += $val;
+        }
+        return $hasil;
+    }
+
 
 }

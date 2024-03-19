@@ -21,7 +21,11 @@
                 @endif
         <div class="row">
             <div class="col">
+                @if (Auth::user()->role == 'admin')
+
                 <a href="{{ route('nasabah.create') }}" class="btn btn-success my-2">Tambah data</a>
+
+                @endif
                 <table class="table">
                     <thead>
                         <tr>
@@ -29,7 +33,11 @@
                             <th scope="col">Nama</th>
                             <th scope="col">Saldo</th>
                             <th scope="col">Deskripsi</th>
+                            @if (Auth::user()->role == 'admin')
+
                             <th scope="col">Aksi</th>
+
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +47,8 @@
                             <td>{{ $nasabah->nama }}</td>
                             <td>{{ "Rp " . number_format($nasabah->saldo,2,',','.') }}</td>
                             <td>{{ $nasabah->keterangan }}</td>
+                            @if (Auth::user()->role == 'admin')
+
                             <td class="d-flex gap-2">
                                 <a href="{{ route('nasabah.edit', $nasabah->id) }}" class="btn btn-warning">Edit</a>
                                 <form method="post" action="{{ route('nasabah.hapus', $nasabah->id) }}">
@@ -46,6 +56,8 @@
                                     <input onclick="return confirm('Apa anda yakin ingin menghapus nasabah {{ $nasabah->nama }} ?')" type="submit" value="Hapus" class="btn btn-danger">
                                 </form>
                             </td>
+
+                            @endif
                         </tr>
                         @empty
 

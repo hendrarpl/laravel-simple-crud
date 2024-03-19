@@ -13,10 +13,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Bank</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Users</a>
-                </li>
             </ul>
+            <div class="dropdown">
+                <a class="btn btn-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Hai, {{ Auth::user()->name }}
+                </a>
+
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{{ route('nasabah.logout') }}">Logout</a></li>
+                </ul>
+              </div>
             <form action="{{ route('nasabah.cari')}}" class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="cari">
                 <button class="btn btn-outline-success" type="submit">Search</button>
