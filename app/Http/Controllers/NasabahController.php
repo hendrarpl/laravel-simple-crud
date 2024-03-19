@@ -81,29 +81,4 @@ class NasabahController extends Controller
         return view('index', ['nasabahs' => $hasil]);
     }
 
-    public function coba(){
-        $userData = [
-            [
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'role' => 'admin',
-            'password' =>  bcrypt(123456)
-            ],
-            [
-            'name' => 'guest',
-            'email' => 'guest@gmail.com',
-            'role' => 'guest',
-            'password' =>  bcrypt(123456)
-            ],
-        ];
-
-        $hasil = [];
-
-        foreach($userData as $key => $val){
-            $hasil += $val;
-        }
-        return $hasil;
-    }
-
-
 }

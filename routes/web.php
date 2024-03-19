@@ -27,7 +27,8 @@ Route::middleware(['auth'])->group(function(){
     Route::put('/update/{id}', [NasabahController::class, 'update'])->name('nasabah.update');
     Route::post('/hapus/{id}', [NasabahController::class, 'hapus'])->name('nasabah.hapus');
     Route::get('/cari', [NasabahController::class, 'cari'])->name('nasabah.cari');
-    Route::get('/coba', [NasabahController::class, 'coba']);
+Route::get('/logout', [LoginController::class, 'logout'])->name('nasabah.logout');
+
 });
 
 
@@ -37,4 +38,8 @@ Route::get('/home', function(){
     return redirect('/');
 });
 
-Route::get('/logout', [LoginController::class, 'logout'])->name('nasabah.logout');
+
+
+Route::get('/signin', function(){
+    return view('signin');
+});
